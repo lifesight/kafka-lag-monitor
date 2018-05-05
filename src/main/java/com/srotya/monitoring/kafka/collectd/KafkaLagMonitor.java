@@ -110,13 +110,14 @@ public class KafkaLagMonitor
 
 					if (monitor.getConsumerGroupName() == null
 							|| monitor.getConsumerGroupName().startsWith("_root")
+							|| monitor.getConsumerGroupName().startsWith("tranquility")
 							|| monitor.getConsumerGroupName().startsWith("console-consumer")) {
 						continue;
 					}
 
 					PluginData pd = new PluginData();
-					pd.setPlugin(monitor.getConsumerGroupName());
-					pd.setPluginInstance(monitor.getTopic() + "/" + monitor.getPartition());
+					pd.setPlugin("");
+					pd.setPluginInstance(monitor.getConsumerGroupName() + "." + monitor.getTopic() + "." + monitor.getPartition());
 					pd.setTime(System.currentTimeMillis());
 					pd.setHost(alias);
 					ValueList values = new ValueList(pd);
