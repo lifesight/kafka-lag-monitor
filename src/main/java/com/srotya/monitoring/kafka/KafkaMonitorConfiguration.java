@@ -28,7 +28,7 @@ public class KafkaMonitorConfiguration extends Configuration {
 	private boolean kerberos = false;
 
 	@Valid
-	private String zookeeperUrls = "localhost:2181";
+	private String zookeeperUrls = "ec2-34-205-4-118.compute-1.amazonaws.com:2181";
 
 	@Valid
 	private int refreshSeconds = 5;
@@ -37,7 +37,7 @@ public class KafkaMonitorConfiguration extends Configuration {
 	private String commonZkRoot = "";
 
 	@Valid
-	private String[] kafkaBroker = new String[] { "localhost" };
+	private String[] kafkaBroker = new String[] { "ec2-34-205-4-118.compute-1.amazonaws.com" };
 
 	@Valid
 	private int kafkaPort = 9092;
@@ -56,6 +56,12 @@ public class KafkaMonitorConfiguration extends Configuration {
 
 	@Valid
 	private int jmxPort = 9999;
+
+	@Valid
+	private String graphiteUrl = "18.206.71.156";
+
+	@Valid
+	private int graphitePort = 2003;
 
 	public String getZookeeperUrls() {
 		return zookeeperUrls;
@@ -219,5 +225,21 @@ public class KafkaMonitorConfiguration extends Configuration {
 	 */
 	public void setEnableJMX(boolean enableJMX) {
 		this.enableJMX = enableJMX;
+	}
+
+	public String getGraphiteUrl() {
+		return graphiteUrl;
+	}
+
+	public void setGraphiteUrl(String graphiteUrl) {
+		this.graphiteUrl = graphiteUrl;
+	}
+
+	public int getGraphitePort() {
+		return graphitePort;
+	}
+
+	public void setGraphitePort(int graphitePort) {
+		this.graphitePort = graphitePort;
 	}
 }
