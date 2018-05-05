@@ -107,13 +107,20 @@ public class KafkaLagMonitor
 			});
 			if (references.get() != null) {
 				for (KafkaOffsetMonitor monitor : references.get()) {
+
+					if (monitor.getConsumerGroupName() == null
+							|| monitor.getConsumerGroupName().startsWith("_root")
+							|| monitor.getConsumerGroupName().startsWith("console-consumer")) {
+						continue;
+					}
+
 					PluginData pd = new PluginData();
-					pd.setPluginInstance(monitor.getTopic() + "-" + monitor.getPartition());
+					pd.setPlugin(monitor.getConsumerGroupName());
+					pd.setPluginInstance(monitor.getTopic() + "/" + monitor.getPartition());
 					pd.setTime(System.currentTimeMillis());
 					pd.setHost(alias);
 					ValueList values = new ValueList(pd);
 					values.setType("records");
-					values.setPlugin(monitor.getConsumerGroupName());
 					values.setTypeInstance("lag");
 					values.setValues(Arrays.asList(monitor.getLag()));
 					Collectd.logDebug("Dispatching data:" + values);
