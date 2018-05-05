@@ -43,7 +43,7 @@ public class KafkaMonitorConfiguration extends Configuration {
 	private int kafkaPort = 9092;
 
 	@Valid
-	private String consumerGroupName = "_kafka_monitor";
+	private String consumerGroupName = "_kafka_monitor1";
 
 	@Valid
 	private String sidewinderConfigPath = "";
